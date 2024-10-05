@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import ipaddress
+import os
 
 app = Flask(__name__)
 
@@ -50,4 +51,5 @@ def determinar_ip_class(ip):
         return 'Clase E (Reservada)'
 
 if __name__ == '__main__':
-    app.run(port=80)
+    port = int(os.environ.get('PORT', 5000))  # Cambiar el puerto a uno dinámico
+    app.run(host='0.0.0.0', port=port)  # Permite que Flask utilice cualquier puerto asignado por el entorno
